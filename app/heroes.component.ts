@@ -16,7 +16,9 @@ export class HeroesComponent implements OnInit
 {
   selectedHero: Hero;
   heroes: Hero[];
-  
+  addingHero: boolean = false;
+  error:any;
+
   constructor(
     private heroService: HeroService,
     private router: Router
@@ -37,9 +39,25 @@ export class HeroesComponent implements OnInit
     this.router.navigate(link);
   }
 
-  addHero(){
-    let link = ['/detail'];
-    this.router.navigate(link);
+  addHero() {
+    this.addingHero = true;
+    this.selectedHero = null;
+  }
+
+  close(savedHero: Hero) {
+    this.addingHero = false;
+    if (savedHero) { this.getHeroes(); }
+  }
+
+  deleteHero(hero:Hero, event:any){
+    event.stopPropagation();
+    this.heroService
+      .delete(hero)
+      .then(res => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null; }
+      })
+      .catch(error => this.error = error)
   }
  }
 
