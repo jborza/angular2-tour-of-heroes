@@ -20,7 +20,8 @@ import {DashboardComponent} from './dashboard.component';
   declarations: [
     AppComponent,
     HeroesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroDetailComponent
   ],
   providers: [
     HeroService
