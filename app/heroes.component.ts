@@ -36,5 +36,10 @@ export class HeroesComponent implements OnInit
     let link = ['/detail',this.selectedHero.id];
     this.router.navigate(link);
   }
+
+  addHero(){
+    let link = ['/detail'];
+    this.router.navigate(link);
+  }
  }
 
